@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native'; 
 
 const Appetizer = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{fontSize:16,fontWeight:'700'}}>Appetizer</Text>
+    <View>
+       <Image 
+        source={require("../assets/image/salmon-tataki.jpeg")}
+        style={{width: 100, height: 100}}
+        contentFit='cover'
+        transition={1000}
+       />
+         <Text>Salmon Tataki</Text>
     </View>
   )
 }
