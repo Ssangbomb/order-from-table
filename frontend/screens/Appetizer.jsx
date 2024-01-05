@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native'; 
+import { View, Text, Image, FlatList, StyleSheet } from 'react-native'; 
 
 const IMAGES = {
   image1: require('../assets/image/edamame.jpeg'),
@@ -9,20 +9,44 @@ const IMAGES = {
   image5: require('../assets/image/salmon-tataki.jpeg'),
 }
 
-const Appetizer = () => {
-  const [ images, setImages ] = usestate([
-    { id: '1', image: IMAGES.image1 },
-    { id: '2', image: IMAGES.image2 },
-    { id: '3', image: IMAGES.image3 },
-    { id: '4', image: IMAGES.image4 },
-    { id: '5', image: IMAGES.image5 },
-  ])
-  return (
-    <View style={{}}>
+const Item = ({image, title}) => (
+  <View>
+    <Image 
+      style={{
+        width: 200,
+        height: 200,
+        borderRadius: 20
+      }}
+      source={image}/>
+    <Text>{title}</Text>
+  </View>
+);
 
-         <Text>Salmon Tataki</Text>
+const Appetizer = () => {
+  const [ images, setImages ] = useState([
+    { id: '1', title: 'edamame', image: IMAGES.image1 },
+    { id: '2', title: 'ebi sunomono', image: IMAGES.image2 },
+    { id: '3', title: 'yam fries', image: IMAGES.image3 },
+    { id: '4', title: 'tuna tataki',image: IMAGES.image4 },
+    { id: '5', title: 'salmon tataki', image: IMAGES.image5 },
+  ]) 
+  return (
+    <View style={styles.container}>
+      <FlatList 
+        data={images}
+        renderItem={({item}) => <Item image={item.image} title={item.title}/>}
+        keyExtractor={item => item.id}
+        horizontal
+      />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around'
+  }
+})
 
 export default Appetizer;
